@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using TdP2019TPFinalRichieri.DAL;
 
-namespace TdP2019TPFinalRichieri.Services.QuestionsSetImporter
+namespace TdP2019TPFinalRichieri.Services.QuestionsSetImporter.Factory
 {
-    using Importers;
+    using Services.QuestionsSetImporter.Importers;
+    using Services.QuestionsSetImporter;
 
     public class QuestionsSetImporterFactory : IQuestionsSetImporterFactory
     {

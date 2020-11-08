@@ -8,9 +8,10 @@ using TdP2019TPFinalRichieri.Entities;
 using TdP2019TPFinalRichieri.DTO;
 using Moq;
 using System;
+using TdP2019TPFinalRichieri.Services.QuestionsSetImporter.Factory;
 using TdP2019TPFinalRichieri.Services.QuestionsSetImporter;
 
-namespace TdP2019TPFinalRichieriTests
+namespace TdP2019TPFinalRichieriTests.Services
 {
     [TestFixture]
     public class QuestionsSetServiceTest
@@ -38,6 +39,10 @@ namespace TdP2019TPFinalRichieriTests
             this._service = new QuestionsSetService(unitOfWorkFactory, mapperFactory, _qsImporterFactoryMock.Object);
         }
 
+
+        /// <summary>
+        /// Test correct operation when there are no question sets in the repository.
+        /// </summary>
         [Test]
         public void GetQuestionsSetsEmptyShouldBeOk()
         {
@@ -80,20 +85,24 @@ namespace TdP2019TPFinalRichieriTests
         }
 
 
+        /// <summary>
+        /// Test if NotImplementedException is thrown when there is no 
+        /// importer defined for the given question set name.
+        /// </summary>
         [Test]
-        [ExpectedException(typeof(NotImplementedException))]
         public void UpdateDataShouldThrowNotImplementedException()
         {
             _qsImporterFactoryMock.Setup(mock => mock.GetImporter(It.IsAny<string>())).Throws(new NotImplementedException());
-            _service.UpdateQuestionsSetData("ABCD1234");
+            Assert.Throws<NotImplementedException>(() => _service.UpdateQuestionsSetData("ABCD1234"));
         }
+
 
         [Test]
         public void UpdateDataShouldBeOk()
         {
             var importerMock = new Mock<IQuestionsSetImporter>();
             _qsImporterFactoryMock.Setup(mock => mock.GetImporter(It.IsAny<string>())).Returns(importerMock.Object);
-            ResponseDTO<object> response = _service.UpdateQuestionsSetData("ABCD");
+            ResponseDTO<object> response = _service.UpdateQuestionsSetData("ABCD1234");
 
             Assert.True(response.Success);
         }
