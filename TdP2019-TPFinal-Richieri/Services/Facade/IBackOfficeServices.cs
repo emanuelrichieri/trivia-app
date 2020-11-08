@@ -7,6 +7,6 @@ namespace TdP2019TPFinalRichieri.Services.Facade
     {
         ResponseDTO<object> UpdateQuestionsSetData(string pQuestionsSetName);
 
-        ResponseDTO<object> Save(QuestionsSetDTO pQuestionsSet);
+        ResponseDTO<object> SaveQuestionsSet(QuestionsSetDTO pQuestionsSet);
     }
 }

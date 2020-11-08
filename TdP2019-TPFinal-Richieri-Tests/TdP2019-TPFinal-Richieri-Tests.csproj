@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Services\QuestionsSetServiceTest.cs" />
     <Compile Include="Services\Facade\OperativeServicesTest.cs" />
+    <Compile Include="Services\Facade\BackOfficeServicesTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

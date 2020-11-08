@@ -47,21 +47,16 @@ namespace TdP2019TPFinalRichieri.Services.Facade
         /// Save the specified pQuestionsSet.
         /// </summary>
         /// <param name="pQuestionsSet">Questions set DTO.</param>
-        public ResponseDTO<object> Save(QuestionsSetDTO pQuestionsSet)
+        public ResponseDTO<object> SaveQuestionsSet(QuestionsSetDTO pQuestionsSet)
         {
             try
             {
                 QuestionsSet modifiedQuestionsSet = _mapper.Map<QuestionsSet>(pQuestionsSet);
                 return _questionsSetService.Save(modifiedQuestionsSet);
             } 
-            catch (NotFoundException ex)
-            {
-                _logger.Error(ex, $"Questions Set not found. {ex.Message}");
-                return ResponseDTO.NotFound("The given questions set doesn't exist.");
-            }
             catch (Exception ex)
             {
-                _logger.Error(ex, "Failed to save QuestionsSet.");
+                _logger.Error(ex, $"Failed to save QuestionsSet. {ex.Message}");
                 return ResponseDTO.InternalError(ErrorMessageHelper.FailedOperation("saving questions set"));
             }
         }
