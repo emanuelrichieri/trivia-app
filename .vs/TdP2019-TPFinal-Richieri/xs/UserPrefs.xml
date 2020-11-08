@@ -1,0 +1,46 @@
+﻿<Properties StartupConfiguration="{35330125-53FE-4FC1-8701-E9D2C739F254}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="TdP2019-TPFinal-Richieri/Entities/Question.cs">
+    <Files>
+      <File FileName="TdP2019-TPFinal-Richieri/Services/Impl/UserService.cs" Line="31" Column="1" />
+      <File FileName="TdP2019-TPFinal-Richieri/Services/Facade/OperativeServices.cs" Line="29" Column="10" />
+      <File FileName="TdP2019-TPFinal-Richieri/Program.cs" Line="35" Column="16" />
+      <File FileName="TdP2019-TPFinal-Richieri/Services/Impl/QuestionsSetService.cs" Line="12" Column="1" />
+      <File FileName="TdP2019-TPFinal-Richieri-Tests/Services/QuestionsSetServiceTest.cs" Line="15" Column="18" />
+      <File FileName="TdP2019-TPFinal-Richieri-Tests/packages.config" Line="9" Column="12" />
+      <File FileName="TdP2019-TPFinal-Richieri/DAL/IRepository.cs" Line="32" Column="30" />
+      <File FileName="TdP2019-TPFinal-Richieri/DAL/EntityFramework/Repository.cs" Line="37" Column="9" />
+      <File FileName="TdP2019-TPFinal-Richieri/Services/QuestionsSetImporter/Importers/OpenTriviaDBSetImporter.cs" Line="35" Column="43" />
+      <File FileName="TdP2019-TPFinal-Richieri/Entities/Question.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="TdP2019-TPFinal-Richieri" expanded="True">
+            <Node name="TdP2019-TPFinal-Richieri" expanded="True">
+              <Node name="Entities" expanded="True">
+                <Node name="Question.cs" selected="True" />
+              </Node>
+              <Node name="Services" expanded="True">
+                <Node name="Impl" expanded="True" />
+              </Node>
+            </Node>
+            <Node name="TdP2019-TPFinal-Richieri-Tests" expanded="True">
+              <Node name="References" expanded="True" />
+              <Node name="Services" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.TdP2019-TPFinal-Richieri PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.TdP2019-TPFinal-Richieri-Tests PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/home/emanuel/Projects/TdP2019-TPFinal-Richieri/TdP2019-TPFinal-Richieri/Tests/Services/QuestionsSetServiceTest.cs" relfile="TdP2019-TPFinal-Richieri/Tests/Services/QuestionsSetServiceTest.cs" line="34" column="43" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

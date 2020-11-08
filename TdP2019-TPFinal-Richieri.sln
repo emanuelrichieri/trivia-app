@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TdP2019-TPFinal-Richieri", "TdP2019-TPFinal-Richieri\TdP2019-TPFinal-Richieri.csproj", "{35330125-53FE-4FC1-8701-E9D2C739F254}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TdP2019-TPFinal-Richieri-Tests", "TdP2019-TPFinal-Richieri-Tests\TdP2019-TPFinal-Richieri-Tests.csproj", "{13C82C27-24C3-4C7C-9EF9-798F97AA5B5B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{35330125-53FE-4FC1-8701-E9D2C739F254}.Debug|x86.ActiveCfg = Debug|x86
+		{35330125-53FE-4FC1-8701-E9D2C739F254}.Debug|x86.Build.0 = Debug|x86
+		{35330125-53FE-4FC1-8701-E9D2C739F254}.Release|x86.ActiveCfg = Release|x86
+		{35330125-53FE-4FC1-8701-E9D2C739F254}.Release|x86.Build.0 = Release|x86
+		{13C82C27-24C3-4C7C-9EF9-798F97AA5B5B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{13C82C27-24C3-4C7C-9EF9-798F97AA5B5B}.Debug|x86.Build.0 = Debug|Any CPU
+		{13C82C27-24C3-4C7C-9EF9-798F97AA5B5B}.Release|x86.ActiveCfg = Release|Any CPU
+		{13C82C27-24C3-4C7C-9EF9-798F97AA5B5B}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

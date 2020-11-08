@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{35330125-53FE-4FC1-8701-E9D2C739F254}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>TdP2019TPFinalRichieri</RootNamespace>
+    <AssemblyName>TdP2019-TPFinal-Richieri</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="Mono.Posix" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.10.1.1\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.4.7.5\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Buffers">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="System.Numerics.Vectors">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>gtk-sharp-2.0</Package>
+    </Reference>
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>gtk-sharp-2.0</Package>
+    </Reference>
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>glib-sharp-2.0</Package>
+    </Reference>
+    <Reference Include="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>gtk-sharp-2.0</Package>
+    </Reference>
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>gtk-sharp-2.0</Package>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.7.1\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.1\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json">
+      <HintPath>..\packages\System.Text.Json.4.7.2\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Npgsql">
+      <HintPath>..\packages\Npgsql.4.1.5\lib\net461\Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework6.Npgsql">
+      <HintPath>..\packages\EntityFramework6.Npgsql.6.4.1\lib\net461\EntityFramework6.Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.4.4.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.3.1.9\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.3.1.9\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.3.1.9\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.7.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.3.1.9\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.3.1.9\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.3.1.9\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Binder">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Binder.3.1.9\lib\netstandard2.0\Microsoft.Extensions.Configuration.Binder.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options">
+      <HintPath>..\packages\Microsoft.Extensions.Options.3.1.9\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.3.1.9\lib\netstandard2.0\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\packages\StructureMap.4.7.1\lib\net45\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap.Microsoft.DependencyInjection">
+      <HintPath>..\packages\StructureMap.Microsoft.DependencyInjection.2.0.0\lib\netstandard2.0\StructureMap.Microsoft.DependencyInjection.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="gtk-gui\gui.stetic">
+      <LogicalName>gui.stetic</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\..\files\MEGAsync\UTN\3- Tercer Año\Taller de Programación\Header.png">
+      <Link>UI\Resources\Header.png</Link>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="gtk-gui\generated.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Entities\QuestionsSet.cs" />
+    <Compile Include="Entities\Level.cs" />
+    <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\Question.cs" />
+    <Compile Include="Entities\Answer.cs" />
+    <Compile Include="Entities\Session.cs" />
+    <Compile Include="Entities\SessionAnswer.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="DTO\UserDTO.cs" />
+    <Compile Include="DTO\SessionResultDTO.cs" />
+    <Compile Include="DTO\AnswerDTO.cs" />
+    <Compile Include="DTO\QuestionDTO.cs" />
+    <Compile Include="DTO\ResponseDTO.cs" />
+    <Compile Include="DTO\SessionAnswerDTO.cs" />
+    <Compile Include="DTO\SessionDTO.cs" />
+    <Compile Include="DTO\QuestionsSetDTO.cs" />
+    <Compile Include="DTO\LevelDTO.cs" />
+    <Compile Include="DTO\CategoryDTO.cs" />
+    <Compile Include="DTO\AnswerResultDTO.cs" />
+    <Compile Include="DAL\EntityFramework\TriviaDbContext.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="DAL\IRepository.cs" />
+    <Compile Include="DAL\EntityFramework\Repository.cs" />
+    <Compile Include="DAL\IQuestionsSetRepository.cs" />
+    <Compile Include="DAL\IQuestionRepository.cs" />
+    <Compile Include="DAL\IUserRepository.cs" />
+    <Compile Include="DAL\ISessionRepository.cs" />
+    <Compile Include="DAL\EntityFramework\UserRepository.cs" />
+    <Compile Include="DAL\EntityFramework\QuestionsSetRepository.cs" />
+    <Compile Include="DAL\EntityFramework\LevelRepository.cs" />
+    <Compile Include="DAL\EntityFramework\QuestionRepository.cs" />
+    <Compile Include="Mapper\TriviaMapperFactory.cs" />
+    <Compile Include="Mapper\Profiles\SessionProfile.cs" />
+    <Compile Include="Mapper\Profiles\QuestionProfile.cs" />
+    <Compile Include="DAL\IUnitOfWork.cs" />
+    <Compile Include="DAL\EntityFramework\UnitOfWork.cs" />
+    <Compile Include="DAL\ICategoryRepository.cs" />
+    <Compile Include="DAL\ILevelRepository.cs" />
+    <Compile Include="DAL\EntityFramework\SessionRepository.cs" />
+    <Compile Include="DAL\EntityFramework\CategoryRepository.cs" />
+    <Compile Include="Exceptions\NotEnoughQuestionsException.cs" />
+    <Compile Include="Exceptions\NoContentException.cs" />
+    <Compile Include="Exceptions\InvalidParametersException.cs" />
+    <Compile Include="DAL\ISessionAnswerRepository.cs" />
+    <Compile Include="DAL\EntityFramework\SessionAnswerRepository.cs" />
+    <Compile Include="Mapper\Profiles\AnswerResultProfile.cs" />
+    <Compile Include="Mapper\Profiles\AnswerProfile.cs" />
+    <Compile Include="Mapper\Profiles\SessionResultProfile.cs" />
+    <Compile Include="Exceptions\NonExistingUserException.cs" />
+    <Compile Include="Services\ScoreCalculator\IScoreCalculator.cs" />
+    <Compile Include="Services\ScoreCalculator\Calculators\OpenTriviaDBScoreCalculator.cs" />
+    <Compile Include="Services\QuestionsSetImporter\IQuestionsSetImporter.cs" />
+    <Compile Include="Services\QuestionsSetImporter\Importers\OpenTriviaDBSetImporter.cs" />
+    <Compile Include="Util\ErrorMessageHelper.cs" />
+    <Compile Include="gtk-gui\TdP2019TPFinalRichieri.LogInDialog.cs" />
+    <Compile Include="UI\LogInDialog.cs" />
+    <Compile Include="UI\ErrorDialog.cs" />
+    <Compile Include="gtk-gui\TdP2019TPFinalRichieri.SignUpDialog.cs" />
+    <Compile Include="UI\SignUpDialog.cs" />
+    <Compile Include="gtk-gui\TdP2019TPFinalRichieri.ErrorDialog.cs" />
+    <Compile Include="gtk-gui\TdP2019TPFinalRichieri.InfoDialog.cs" />
+    <Compile Include="UI\InfoDialog.cs" />
+    <Compile Include="gtk-gui\TdP2019TPFinalRichieri.SuccessDialog.cs" />
+    <Compile Include="UI\SuccessDialog.cs" />
+    <Compile Include="Mapper\Profiles\UserProfile.cs" />
+    <Compile Include="gtk-gui\TdP2019TPFinalRichieri.MainWindow.cs" />
+    <Compile Include="UI\MainWindow.cs" />
+    <Compile Include="TriviaApp.cs" />
+    <Compile Include="Services\Facade\BackOfficeServices.cs" />
+    <Compile Include="Services\Facade\OperativeServices.cs" />
+    <Compile Include="Mapper\Profiles\QuestionsSetProfile.cs" />
+    <Compile Include="gtk-gui\TdP2019TPFinalRichieri.SettingsDialog.cs" />
+    <Compile Include="UI\SettingsDialog.cs" />
+    <Compile Include="Util\LogConfig.cs" />
+    <Compile Include="Mapper\Profiles\LevelProfile.cs" />
+    <Compile Include="Mapper\Profiles\CategoryProfile.cs" />
+    <Compile Include="Constants\QuestionsSetsName.cs" />
+    <Compile Include="Services\Impl\QuestionsSetService.cs" />
+    <Compile Include="Services\Impl\SessionService.cs" />
+    <Compile Include="Services\Impl\UserService.cs" />
+    <Compile Include="Services\IQuestionsSetService.cs" />
+    <Compile Include="Services\IScoreService.cs" />
+    <Compile Include="Services\ISessionService.cs" />
+    <Compile Include="Services\IUserService.cs" />
+    <Compile Include="DAL\IUnitOfWorkFactory.cs" />
+    <Compile Include="DAL\EntityFramework\UnitOfWorkFactory.cs" />
+    <Compile Include="Mapper\IMapperFactory.cs" />
+    <Compile Include="Services\Facade\IOperativeServices.cs" />
+    <Compile Include="Services\Facade\IBackOfficeServices.cs" />
+    <Compile Include="Services\Impl\HttpService.cs" />
+    <Compile Include="Services\IHttpService.cs" />
+    <Compile Include="Services\QuestionsSetImporter\IQuestionsSetImporterFactory.cs" />
+    <Compile Include="Services\QuestionsSetImporter\QuestionsSetImporterFactory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DAL\" />
+    <Folder Include="Entities\" />
+    <Folder Include="DTO\" />
+    <Folder Include="Services\" />
+    <Folder Include="DAL\EntityFramework\" />
+    <Folder Include="Migrations\" />
+    <Folder Include="Mapper\" />
+    <Folder Include="Mapper\Profiles\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="Services\ScoreCalculator\" />
+    <Folder Include="Services\ScoreCalculator\Calculators\" />
+    <Folder Include="Services\QuestionsSetImporter\" />
+    <Folder Include="Services\QuestionsSetImporter\Importers\" />
+    <Folder Include="Util\" />
+    <Folder Include="UI\" />
+    <Folder Include="UI\Resources\" />
+    <Folder Include="Services\Facade\" />
+    <Folder Include="Constants\" />
+    <Folder Include="Services\Impl\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+</Project>
