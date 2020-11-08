@@ -10,6 +10,7 @@ using Moq;
 using System;
 using TdP2019TPFinalRichieri.Services.QuestionsSetImporter.Factory;
 using TdP2019TPFinalRichieri.Services.QuestionsSetImporter;
+using TdP2019TPFinalRichieri.Exceptions;
 
 namespace TdP2019TPFinalRichieriTests.Services
 {
@@ -104,7 +105,30 @@ namespace TdP2019TPFinalRichieriTests.Services
             _qsImporterFactoryMock.Setup(mock => mock.GetImporter(It.IsAny<string>())).Returns(importerMock.Object);
             ResponseDTO<object> response = _service.UpdateQuestionsSetData("ABCD1234");
 
-            Assert.True(response.Success);
+            Assert.IsTrue(response.Success);
+        }
+
+        [Test]
+        public void SaveShouldThrowNullReferenceException()
+        {
+            Assert.Throws<NullReferenceException>(() => _service.Save(null));
+        }
+
+        [Test]
+        public void SaveShouldThrowNotFoundException()
+        {
+            _repositoryMock.Setup(repository => repository.Get(It.IsAny<int>())).Returns((QuestionsSet) null);
+            QuestionsSet questionsSet = new QuestionsSet { Id = 1 };
+            Assert.Throws<NotFoundException>(() => _service.Save(questionsSet));
+        }
+
+        [Test]
+        public void SaveShouldBeOk()
+        {
+            QuestionsSet questionsSet = new QuestionsSet { Id = 1 };
+            _repositoryMock.Setup(repository => repository.Get(It.IsAny<int>())).Returns(new QuestionsSet());
+            var response = _service.Save(questionsSet);
+            Assert.IsTrue(response.Success);
         }
 
     }

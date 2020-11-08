@@ -206,7 +206,7 @@
     <Compile Include="Mapper\Profiles\AnswerResultProfile.cs" />
     <Compile Include="Mapper\Profiles\AnswerProfile.cs" />
     <Compile Include="Mapper\Profiles\SessionResultProfile.cs" />
-    <Compile Include="Exceptions\NonExistingUserException.cs" />
+    <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Services\ScoreCalculator\IScoreCalculator.cs" />
     <Compile Include="Services\ScoreCalculator\Calculators\OpenTriviaDBScoreCalculator.cs" />
     <Compile Include="Services\QuestionsSetImporter\IQuestionsSetImporter.cs" />

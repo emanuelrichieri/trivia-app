@@ -34,7 +34,7 @@ namespace TdP2019TPFinalRichieri.Services
                 // Non-existing user
                 if (user == null)
                 {
-                    return ResponseDTO<UserDTO>.NoContent($"There is no user associated with the username {pUsername}");
+                    return ResponseDTO<UserDTO>.NotFound($"There is no user associated with the username {pUsername}");
                 }
                 // Password matches with user's password: successful login
                 if (string.Equals(user.Password, pPassword))

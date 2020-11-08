@@ -7,6 +7,7 @@ namespace TdP2019TPFinalRichieri.Services.Facade
     using Util;
     using Services;
     using Entities;
+    using TdP2019TPFinalRichieri.Exceptions;
 
     public class BackOfficeServices : IBackOfficeServices
     {
@@ -53,6 +54,11 @@ namespace TdP2019TPFinalRichieri.Services.Facade
                 QuestionsSet modifiedQuestionsSet = _mapper.Map<QuestionsSet>(pQuestionsSet);
                 return _questionsSetService.Save(modifiedQuestionsSet);
             } 
+            catch (NotFoundException ex)
+            {
+                _logger.Error(ex, $"Questions Set not found. {ex.Message}");
+                return ResponseDTO.NotFound("The given questions set doesn't exist.");
+            }
             catch (Exception ex)
             {
                 _logger.Error(ex, "Failed to save QuestionsSet.");

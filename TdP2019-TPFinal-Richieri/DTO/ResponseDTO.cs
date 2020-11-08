@@ -75,6 +75,16 @@ namespace TdP2019TPFinalRichieri.DTO
         }
 
         /// <summary>
+        /// Error ResponseDTO with NotFound code and a given message.
+        /// <see cref="ResponseCode"/>
+        /// </summary>
+        public static ResponseDTO<TDTO> NotFound(string pMessage)
+        {
+            return Error(pMessage, ResponseCode.NotFound);
+        }
+
+
+        /// <summary>
         /// Error ResponseDTO with NoContent code and a given message.
         /// <see cref="ResponseCode"/>
         /// </summary>
@@ -112,6 +122,7 @@ namespace TdP2019TPFinalRichieri.DTO
         Ok = 200,
         NoContent = 204,
         BadRequest = 400,
+        NotFound = 404,
         Unauthorized = 401,
         InternalError = 500
     }

@@ -11,6 +11,7 @@ namespace TdP2019TPFinalRichieri.Services
     using DAL;
     using QuestionsSetImporter;
     using QuestionsSetImporter.Factory;
+    using TdP2019TPFinalRichieri.Exceptions;
 
     public class QuestionsSetService : IQuestionsSetService
     {
@@ -59,9 +60,17 @@ namespace TdP2019TPFinalRichieri.Services
         /// <param name="pQuestionsSet">Questions set.</param>
         public ResponseDTO<object> Save(QuestionsSet pQuestionsSet)
         {
+            if (pQuestionsSet == null)
+            {
+                throw new NullReferenceException("Questions Set cannot be null");
+            }
             using (IUnitOfWork bUoW = _unitOfWorkFactory.GetUnitOfWork())
             {
                 QuestionsSet entity = bUoW.QuestionsSetRepository.Get(pQuestionsSet.Id);
+                if (entity == null)
+                {
+                    throw new NotFoundException($"No questions set found with id {pQuestionsSet.Id}");
+                }
                 entity = pQuestionsSet;
                 bUoW.Complete();
             }
