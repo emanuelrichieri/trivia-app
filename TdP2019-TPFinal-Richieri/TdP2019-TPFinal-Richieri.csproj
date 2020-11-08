@@ -226,8 +226,6 @@
     <Compile Include="gtk-gui\TdP2019TPFinalRichieri.MainWindow.cs" />
     <Compile Include="UI\MainWindow.cs" />
     <Compile Include="TriviaApp.cs" />
-    <Compile Include="Services\Facade\BackOfficeServices.cs" />
-    <Compile Include="Services\Facade\OperativeServices.cs" />
     <Compile Include="Mapper\Profiles\QuestionsSetProfile.cs" />
     <Compile Include="gtk-gui\TdP2019TPFinalRichieri.SettingsDialog.cs" />
     <Compile Include="UI\SettingsDialog.cs" />
@@ -249,8 +247,10 @@
     <Compile Include="Services\Facade\IBackOfficeServices.cs" />
     <Compile Include="Services\Impl\HttpService.cs" />
     <Compile Include="Services\IHttpService.cs" />
-    <Compile Include="Services\QuestionsSetImporter\IQuestionsSetImporterFactory.cs" />
-    <Compile Include="Services\QuestionsSetImporter\QuestionsSetImporterFactory.cs" />
+    <Compile Include="Services\Facade\Impl\BackOfficeServices.cs" />
+    <Compile Include="Services\Facade\Impl\OperativeServices.cs" />
+    <Compile Include="Services\QuestionsSetImporter\Factory\IQuestionsSetImporterFactory.cs" />
+    <Compile Include="Services\QuestionsSetImporter\Factory\QuestionsSetImporterFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DAL\" />
@@ -272,6 +272,8 @@
     <Folder Include="Services\Facade\" />
     <Folder Include="Constants\" />
     <Folder Include="Services\Impl\" />
+    <Folder Include="Services\Facade\Impl\" />
+    <Folder Include="Services\QuestionsSetImporter\Factory\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
