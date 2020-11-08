@@ -7,6 +7,7 @@ namespace TdP2019TPFinalRichieri.Services.Facade
     using DTO;
     using Mapper;
     using Services;
+    using TdP2019TPFinalRichieri.Exceptions;
     using Util;
 
     public class OperativeServices : IOperativeServices
@@ -117,7 +118,11 @@ namespace TdP2019TPFinalRichieri.Services.Facade
             try
             {
                 return _questionsSetService.GetQuestionsSets();
-            } 
+            }
+            catch (NoContentException)
+            {
+                return ResponseDTO<IEnumerable<QuestionsSetDTO>>.NoContent("No questions sets were found.");
+            }
             catch (Exception ex)
             {
                 _logger.Error(ex, "Failed to fetch QuestionsSet list.");

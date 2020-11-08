@@ -45,13 +45,10 @@ namespace TdP2019TPFinalRichieriTests.Services
         /// Test correct operation when there are no question sets in the repository.
         /// </summary>
         [Test]
-        public void GetQuestionsSetsEmptyShouldBeOk()
+        public void GetQuestionsSetsShouldThrowNoContentException()
         {
             _repositoryMock.Setup(repo => repo.GetAll()).Returns(new List<QuestionsSet>());
-            ResponseDTO<IEnumerable<QuestionsSetDTO>> response = _service.GetQuestionsSets();
-
-            Assert.IsTrue(response.Success);
-            Assert.IsFalse(response.Data.Any());
+            Assert.Throws<NoContentException>(() => _service.GetQuestionsSets());
         }
 
 

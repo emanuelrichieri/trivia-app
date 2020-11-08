@@ -37,7 +37,11 @@ namespace TdP2019TPFinalRichieri.Services
         {
             using (IUnitOfWork bUoW = _unitOfWorkFactory.GetUnitOfWork())
             {
-                IEnumerable<QuestionsSetDTO> questionsSets = _mapper.Map<IEnumerable<QuestionsSetDTO>>(bUoW.QuestionsSetRepository.GetAll().ToList());
+                var questionsSets = _mapper.Map<IEnumerable<QuestionsSetDTO>>(bUoW.QuestionsSetRepository.GetAll().ToList());
+                if (!questionsSets.Any())
+                {
+                    throw new NoContentException("There are no questions sets in the database");
+                }
                 return ResponseDTO<IEnumerable<QuestionsSetDTO>>.Ok(questionsSets);
             }
         }

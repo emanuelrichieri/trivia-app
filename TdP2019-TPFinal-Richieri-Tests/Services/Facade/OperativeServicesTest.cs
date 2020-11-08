@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
 using TdP2019TPFinalRichieri.DTO;
+using TdP2019TPFinalRichieri.Exceptions;
 using TdP2019TPFinalRichieri.Mapper;
 using TdP2019TPFinalRichieri.Services;
 using TdP2019TPFinalRichieri.Services.Facade;
@@ -42,6 +43,16 @@ namespace TdP2019TPFinalRichieriTests.Services.Facade
         }
 
         [Test]
+        public void GetQuestionsSetsShouldReturnNoContent()
+        {
+            this._questionSetServiceMock.Setup(service => service.GetQuestionsSets()).Throws(new NoContentException());
+            var response = this._operativeServices.GetQuestionsSets();
+
+            Assert.IsFalse(response.Success);
+            Assert.AreEqual(ResponseCode.NoContent, response.Code);
+        }
+
+        [Test]
         public void GetQuestionsSetsShouldReturnOk()
         {
             var mockResponse = ResponseDTO<IEnumerable<QuestionsSetDTO>>.Ok(new List<QuestionsSetDTO>());
@@ -52,5 +63,6 @@ namespace TdP2019TPFinalRichieriTests.Services.Facade
             Assert.AreEqual(ResponseCode.Ok, response.Code);
             Assert.NotNull(response.Data);
         }
+
     }
 }
