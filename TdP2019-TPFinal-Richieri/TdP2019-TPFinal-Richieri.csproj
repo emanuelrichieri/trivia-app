@@ -214,14 +214,8 @@
     <Compile Include="Util\ErrorMessageHelper.cs" />
     <Compile Include="gtk-gui\TdP2019TPFinalRichieri.LogInDialog.cs" />
     <Compile Include="UI\LogInDialog.cs" />
-    <Compile Include="UI\ErrorDialog.cs" />
     <Compile Include="gtk-gui\TdP2019TPFinalRichieri.SignUpDialog.cs" />
     <Compile Include="UI\SignUpDialog.cs" />
-    <Compile Include="gtk-gui\TdP2019TPFinalRichieri.ErrorDialog.cs" />
-    <Compile Include="gtk-gui\TdP2019TPFinalRichieri.InfoDialog.cs" />
-    <Compile Include="UI\InfoDialog.cs" />
-    <Compile Include="gtk-gui\TdP2019TPFinalRichieri.SuccessDialog.cs" />
-    <Compile Include="UI\SuccessDialog.cs" />
     <Compile Include="Mapper\Profiles\UserProfile.cs" />
     <Compile Include="gtk-gui\TdP2019TPFinalRichieri.MainWindow.cs" />
     <Compile Include="UI\MainWindow.cs" />
@@ -251,8 +245,9 @@
     <Compile Include="Services\Facade\Impl\OperativeServices.cs" />
     <Compile Include="Services\QuestionsSetImporter\Factory\IQuestionsSetImporterFactory.cs" />
     <Compile Include="Services\QuestionsSetImporter\Factory\QuestionsSetImporterFactory.cs" />
-    <Compile Include="NewSessionDialog.cs" />
     <Compile Include="gtk-gui\TdP2019TPFinalRichieri.NewSessionDialog.cs" />
+    <Compile Include="UI\NewSessionDialog.cs" />
+    <Compile Include="UI\ModalMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DAL\" />

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 namespace TdP2019TPFinalRichieri
 {
     using DTO;
     using Gtk;
+    using TdP2019TPFinalRichieri.UI;
 
     public partial class MainWindow : Gtk.Window
     {
@@ -20,7 +22,7 @@ namespace TdP2019TPFinalRichieri
             if (_triviaApp.LoggedUser == null)
             {
                 this.Hide();
-                new ErrorDialog("Permission denied.").Show();
+                ModalMessage.Error(this, "Permission denied");
             }
             this.Build();
             this.lblUsername.Text = _triviaApp.LoggedUser.Username;
@@ -54,13 +56,12 @@ namespace TdP2019TPFinalRichieri
             }
             else
             {
-                new ErrorDialog(response.Message).Show();
+                ModalMessage.Error(this, response.Message);
             }
         }
 
         protected void OnBtnStartNewSessionClicked(object sender, EventArgs e)
         {
-
         }
 
         protected void OnBtnShowRankingClicked(object sender, EventArgs e)

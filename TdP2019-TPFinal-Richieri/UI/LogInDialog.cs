@@ -1,5 +1,6 @@
 ﻿using System;
 using TdP2019TPFinalRichieri.DTO;
+using TdP2019TPFinalRichieri.UI;
 
 namespace TdP2019TPFinalRichieri
 {
@@ -28,8 +29,7 @@ namespace TdP2019TPFinalRichieri
             }
             else
             {
-                ErrorDialog errorDialog = new ErrorDialog(response.Message);
-                errorDialog.Show();
+                ModalMessage.Error(this, response.Message);
             }
         }
 

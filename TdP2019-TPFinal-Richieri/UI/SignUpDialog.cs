@@ -1,7 +1,7 @@
 ﻿using System;
 namespace TdP2019TPFinalRichieri
 {
-    using DTO;
+    using TdP2019TPFinalRichieri.UI;
 
     public partial class SignUpDialog : Gtk.Dialog
     {
@@ -15,15 +15,15 @@ namespace TdP2019TPFinalRichieri
 
         protected void OnBtnConfirmClicked(object sender, EventArgs e)
         {
-            ResponseDTO<object> response = _triviaApp.SignUp(this.entUsername.Text, this.entPassword.Text, this.entConfirmPassword.Text);
+            var response = _triviaApp.SignUp(this.entUsername.Text, this.entPassword.Text, this.entConfirmPassword.Text);
             if (response.Success)
             {
-                new SuccessDialog(response.Message).Show();
+                ModalMessage.Info(this, Gtk.ButtonsType.Ok, response.Message);
                 this.Hide();
             }
             else
             {
-                new ErrorDialog(response.Message).Show();
+                ModalMessage.Error(this, response.Message);
             }
         }
 

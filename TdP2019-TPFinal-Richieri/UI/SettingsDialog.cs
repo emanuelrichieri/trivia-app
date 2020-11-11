@@ -1,5 +1,6 @@
 ﻿using System;
 using TdP2019TPFinalRichieri.DTO;
+using TdP2019TPFinalRichieri.UI;
 
 namespace TdP2019TPFinalRichieri
 {
@@ -26,11 +27,11 @@ namespace TdP2019TPFinalRichieri
             if (response.Success)
             {
                 this.lblLoading.Visible = false;
-                new SuccessDialog(response.Message).Show();
+                ModalMessage.Info(this, Gtk.ButtonsType.Ok, response.Message);
             }
             else
             {
-                new ErrorDialog(response.Message).Show();
+                ModalMessage.Error(this, response.Message);
             }
         }
 
@@ -52,22 +53,26 @@ namespace TdP2019TPFinalRichieri
             var response = this._triviaApp.SaveQuestionsSet();
             if (response.Success)
             {
-                new SuccessDialog(response.Message).Show();
+                ModalMessage.Info(this, Gtk.ButtonsType.Ok, response.Message);
                 this.Hide();
             }
             else
             {
-                new ErrorDialog(response.Message).Show();
+                ModalMessage.Error(this, response.Message);
             }
         }
 
         protected void OnEntExpectedAnswerTimeChanged(object sender, EventArgs e)
         {
+            if (entExpectedAnswerTime.Text.Length == 0)
+            {
+                return;
+            }
             bool parseIntSuccess = int.TryParse(this.entExpectedAnswerTime.Text, out int expectedAnswerTimeValue);
             if (!parseIntSuccess)
             {
                 this.entExpectedAnswerTime.Text = this._triviaApp.SelectedQuestionsSet.ExpectedAnswerTime.ToString();
-                new ErrorDialog("Invalid number").Show();
+                ModalMessage.Error(this, "Invalid number");
             }
         }
     }
