@@ -20,7 +20,7 @@ namespace TdP2019TPFinalRichieri
         /// </summary>
         protected void OnClickLogIn(object sender, EventArgs e)
         {
-            ResponseDTO<UserDTO> response = _triviaApp.Login(this.entUsername.Text, this.entPassword.Text);
+            var response = _triviaApp.Login(this.entUsername.Text, this.entPassword.Text);
             if (response.Success)
             {
                 this.Hide();

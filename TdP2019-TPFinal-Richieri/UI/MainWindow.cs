@@ -34,7 +34,7 @@ namespace TdP2019TPFinalRichieri
         protected void LoadQuestionsSets()
         {
 
-            ResponseDTO<IEnumerable<QuestionsSetDTO>> response = _triviaApp.GetQuestionsSets();
+            var response = _triviaApp.GetQuestionsSets();
             if (response.Success)
             {
                 _questionsSets = response.Data;
@@ -42,7 +42,7 @@ namespace TdP2019TPFinalRichieri
                 ListStore store = new ListStore(typeof(string));
                 this.cbbQuestionsSets.Model = store;
 
-                foreach (QuestionsSetDTO questionsSet in _questionsSets)
+                foreach (var questionsSet in _questionsSets)
                 {
                     this.cbbQuestionsSets.AppendText(questionsSet.Name);
                 }
@@ -60,6 +60,7 @@ namespace TdP2019TPFinalRichieri
 
         protected void OnBtnStartNewSessionClicked(object sender, EventArgs e)
         {
+
         }
 
         protected void OnBtnShowRankingClicked(object sender, EventArgs e)

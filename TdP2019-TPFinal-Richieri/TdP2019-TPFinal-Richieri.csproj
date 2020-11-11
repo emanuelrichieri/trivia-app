@@ -251,6 +251,8 @@
     <Compile Include="Services\Facade\Impl\OperativeServices.cs" />
     <Compile Include="Services\QuestionsSetImporter\Factory\IQuestionsSetImporterFactory.cs" />
     <Compile Include="Services\QuestionsSetImporter\Factory\QuestionsSetImporterFactory.cs" />
+    <Compile Include="NewSessionDialog.cs" />
+    <Compile Include="gtk-gui\TdP2019TPFinalRichieri.NewSessionDialog.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DAL\" />

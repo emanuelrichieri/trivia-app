@@ -1,5 +1,4 @@
 ﻿using System;
-using Gtk;
 using TdP2019TPFinalRichieri.DTO;
 
 namespace TdP2019TPFinalRichieri
@@ -8,10 +7,14 @@ namespace TdP2019TPFinalRichieri
     {
         private TriviaApp _triviaApp;
 
+        private QuestionsSetDTO _selectedQuestionsSetBackUp;
+
         public SettingsDialog(TriviaApp pTriviaApp)
         {
             this.Build();
             this._triviaApp = pTriviaApp;
+
+            _selectedQuestionsSetBackUp = this._triviaApp.SelectedQuestionsSet;
             this.lblQuestionSetName.Text = this._triviaApp.SelectedQuestionsSet.Name;
             this.entExpectedAnswerTime.Text = this._triviaApp.SelectedQuestionsSet.ExpectedAnswerTime.ToString();
         }
@@ -33,6 +36,12 @@ namespace TdP2019TPFinalRichieri
 
         protected void OnBtnBackClicked(object sender, EventArgs e)
         {
+            this.GoBack();
+        }
+
+        protected void GoBack()
+        {
+            this._triviaApp.SelectedQuestionsSet = _selectedQuestionsSetBackUp;
             this.Hide();
         }
 

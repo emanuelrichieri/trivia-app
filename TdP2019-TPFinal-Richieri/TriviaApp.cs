@@ -46,7 +46,7 @@ namespace TdP2019TPFinalRichieri
             {
                 return ResponseDTO<SessionDTO>.BadRequest("Select a level.");
             }
-            ResponseDTO<SessionDTO> response = _operativeService.NewSession(LoggedUser.Id, pCategory.Id, pLevel.Id, pQuestionsQuantity);
+            var response = _operativeService.NewSession(LoggedUser.Id, pCategory.Id, pLevel.Id, pQuestionsQuantity);
             if (response.Success)
             {
                 CurrentSession = response.Data;
