@@ -15,7 +15,8 @@ namespace TdP2019TPFinalRichieri.Mapper.Profiles
                 )
                 .ForMember(destination => destination.Name,
                     map => map.MapFrom(source => source.Name)
-                );
+                )
+                .ReverseMap();
         }
     }
 }

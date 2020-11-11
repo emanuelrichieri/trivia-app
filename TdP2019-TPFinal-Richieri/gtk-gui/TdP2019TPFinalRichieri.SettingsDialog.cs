@@ -89,7 +89,7 @@ namespace TdP2019TPFinalRichieri
 			// Container child hbox1.Gtk.Box+BoxChild
 			this.lblExpectedAnswerTime = new global::Gtk.Label();
 			this.lblExpectedAnswerTime.Name = "lblExpectedAnswerTime";
-			this.lblExpectedAnswerTime.LabelProp = global::Mono.Unix.Catalog.GetString("Expected Answer Time:");
+			this.lblExpectedAnswerTime.LabelProp = global::Mono.Unix.Catalog.GetString("Expected Answer Time (seconds)");
 			this.lblExpectedAnswerTime.UseMarkup = true;
 			this.lblExpectedAnswerTime.Justify = ((global::Gtk.Justification)(1));
 			this.lblExpectedAnswerTime.Angle = 3.46944695195361E-18D;
@@ -116,7 +116,7 @@ namespace TdP2019TPFinalRichieri
 			this.hbox2.Spacing = 6;
 			// Container child hbox2.Gtk.Box+BoxChild
 			this.btnUpdateData = new global::Gtk.Button();
-			this.btnUpdateData.WidthRequest = 260;
+			this.btnUpdateData.WidthRequest = 310;
 			this.btnUpdateData.CanFocus = true;
 			this.btnUpdateData.Name = "btnUpdateData";
 			this.btnUpdateData.UseUnderline = true;
@@ -132,7 +132,7 @@ namespace TdP2019TPFinalRichieri
 			this.lblLoading.LabelProp = global::Mono.Unix.Catalog.GetString("Loading...");
 			this.hbox2.Add(this.lblLoading);
 			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.hbox2[this.lblLoading]));
-			w8.Position = 2;
+			w8.Position = 1;
 			this.vbox3.Add(this.hbox2);
 			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.hbox2]));
 			w9.Position = 2;

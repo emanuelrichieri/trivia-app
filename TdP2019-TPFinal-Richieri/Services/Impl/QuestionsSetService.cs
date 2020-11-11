@@ -75,7 +75,7 @@ namespace TdP2019TPFinalRichieri.Services
                 {
                     throw new NotFoundException($"No questions set found with id {pQuestionsSet.Id}");
                 }
-                entity = pQuestionsSet;
+                entity.ExpectedAnswerTime = pQuestionsSet.ExpectedAnswerTime;
                 bUoW.Complete();
             }
             return ResponseDTO.Ok("Questions Set successfully saved.");

@@ -19,7 +19,7 @@ namespace TdP2019TPFinalRichieri
         protected void OnBtnUpdateDataClicked(object sender, EventArgs e)
         {
             this.lblLoading.Visible = true;
-            ResponseDTO<object> response = this._triviaApp.UpdateQuestionsSetData();
+            var response = this._triviaApp.UpdateQuestionsSetData();
             if (response.Success)
             {
                 this.lblLoading.Visible = false;
@@ -38,8 +38,18 @@ namespace TdP2019TPFinalRichieri
 
         protected void OnBtnSaveClicked(object sender, EventArgs e)
         {
+            int oldExpectedAnswerTime = this._triviaApp.SelectedQuestionsSet.ExpectedAnswerTime;
             this._triviaApp.SelectedQuestionsSet.ExpectedAnswerTime = int.Parse(this.entExpectedAnswerTime.Text);
-            this.Hide();
+            var response = this._triviaApp.SaveQuestionsSet();
+            if (response.Success)
+            {
+                new SuccessDialog(response.Message).Show();
+                this.Hide();
+            }
+            else
+            {
+                new ErrorDialog(response.Message).Show();
+            }
         }
 
         protected void OnEntExpectedAnswerTimeChanged(object sender, EventArgs e)

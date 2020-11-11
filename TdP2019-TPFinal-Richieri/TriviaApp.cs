@@ -157,5 +157,14 @@ namespace TdP2019TPFinalRichieri
             }
             return this._backOffice.UpdateQuestionsSetData(SelectedQuestionsSet.Name);
         }
+
+        public ResponseDTO<object> SaveQuestionsSet()
+        {
+            if (SelectedQuestionsSet == null)
+            {
+                return ResponseDTO.BadRequest("Select a Questions Set.");
+            }
+            return this._backOffice.SaveQuestionsSet(SelectedQuestionsSet);
+        }
     }
 }
