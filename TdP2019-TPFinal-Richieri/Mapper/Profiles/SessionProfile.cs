@@ -12,12 +12,19 @@ namespace TdP2019TPFinalRichieri.Mapper.Profiles
             CreateMap<Session, SessionDTO>()
                 .ForMember(destination => destination.Username,
                     map => map.MapFrom(source => source.User == null ? "" : source.User.Username))
-                .ForMember(destination => destination.Category, 
+                .ForMember(destination => destination.Category,
                     map => map.MapFrom(source => source.Category == null ? "" : source.Category.Name))
                 .ForMember(dest => dest.Level,
                     map => map.MapFrom(source => source.Level == null ? "" : source.Level.Name))
                 .ForMember(dest => dest.QuestionsSet,
-                    map => map.MapFrom(source => source.GetQuestionsSet() == null ? "" : source.GetQuestionsSet().Name));
+                    map => map.MapFrom(source => source.GetQuestionsSet() == null ? "" : source.GetQuestionsSet().Name))
+                .ForMember(dest => dest.LimitAnswerTime,
+                    map => map.MapFrom(source => source.GetLimitAnswerTime()))
+                .ForMember(dest => dest.LimitSessionTime,
+                    map => map.MapFrom(source => source.GetLimitSessionTime()))
+                .ForMember(dest => dest.RemainingQuestions,
+                    map => map.MapFrom(source => source.Questions))
+                ;
         }
     }
 }

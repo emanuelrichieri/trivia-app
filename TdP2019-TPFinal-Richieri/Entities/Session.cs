@@ -22,7 +22,7 @@ namespace TdP2019TPFinalRichieri.Entities
         /// <returns>The limit session time.</returns>
         public int GetLimitSessionTime()
         {
-            int questionsSize = Questions.ToList().Count;
+            int questionsSize = Questions.Count;
             return GetLimitAnswerTime() * questionsSize;
         }
 

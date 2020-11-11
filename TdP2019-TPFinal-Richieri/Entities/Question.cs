@@ -38,6 +38,10 @@ namespace TdP2019TPFinalRichieri.Entities
         /// </summary>
         public override int GetHashCode()
         {
+            if (Description == null)
+            {
+                return 0;
+            }
             return this.Description.GetHashCode();
         }
 

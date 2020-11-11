@@ -200,7 +200,7 @@
     <Compile Include="DAL\EntityFramework\CategoryRepository.cs" />
     <Compile Include="Exceptions\NotEnoughQuestionsException.cs" />
     <Compile Include="Exceptions\NoContentException.cs" />
-    <Compile Include="Exceptions\InvalidParametersException.cs" />
+    <Compile Include="Exceptions\BadRequestException.cs" />
     <Compile Include="DAL\ISessionAnswerRepository.cs" />
     <Compile Include="DAL\EntityFramework\SessionAnswerRepository.cs" />
     <Compile Include="Mapper\Profiles\AnswerResultProfile.cs" />

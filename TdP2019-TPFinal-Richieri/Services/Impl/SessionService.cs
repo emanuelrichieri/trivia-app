@@ -12,6 +12,7 @@ namespace TdP2019TPFinalRichieri.Services
     using Exceptions;
     using ScoreCalculator;
     using ScoreCalculator.Calculators;
+    using System.Configuration;
 
     public class SessionService : ISessionService
     {
@@ -20,7 +21,7 @@ namespace TdP2019TPFinalRichieri.Services
 
         private readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
 
-        private const int MIN_QUESTIONS_QUANTITY = 10;
+        private readonly int MIN_SESSION_QUESTIONS_QUANTITY; // Default value 10
 
 
         /// <summary>
@@ -32,6 +33,8 @@ namespace TdP2019TPFinalRichieri.Services
         public SessionService(IUnitOfWorkFactory pUnitOfWorkFactory,
                             IMapperFactory pMapperFactory)
         {
+            this.MIN_SESSION_QUESTIONS_QUANTITY = int.Parse(ConfigurationManager.AppSettings["MinSessionQuestionsQuantity"] ?? "10");
+
             this._unitOfWorkFactory = pUnitOfWorkFactory;
             this._mapper = pMapperFactory.GetMapper();
 
@@ -53,15 +56,15 @@ namespace TdP2019TPFinalRichieri.Services
         {
             try
             {
-                if (pQuestionsQuantity < MIN_QUESTIONS_QUANTITY)
+                if (pQuestionsQuantity < MIN_SESSION_QUESTIONS_QUANTITY)
                 {
-                    throw new InvalidParametersException($"Questions quantity must be greather than {MIN_QUESTIONS_QUANTITY}");
+                    throw new BadRequestException($"Questions quantity must be greather than {MIN_SESSION_QUESTIONS_QUANTITY}");
                 }
                 using (IUnitOfWork bUoW = _unitOfWorkFactory.GetUnitOfWork())
                 {
-                    User user = bUoW.UserRepository.Get(pUserId) ?? throw new Exception($"User id {pUserId} not found.");
-                    Level level = bUoW.LevelRepository.Get(pLevelId) ?? throw new Exception($"Level id {pLevelId} not found.");
-                    Category category = bUoW.CategoryRepository.Get(pCategoryId) ?? throw new Exception($"Category id {pCategoryId} not found.");
+                    User user = bUoW.UserRepository.Get(pUserId) ?? throw new NotFoundException($"User id {pUserId} not found.");
+                    Level level = bUoW.LevelRepository.Get(pLevelId) ?? throw new NotFoundException($"Level id {pLevelId} not found.");
+                    Category category = bUoW.CategoryRepository.Get(pCategoryId) ?? throw new NotFoundException($"Category id {pCategoryId} not found.");
                     IEnumerable<Question> questions = bUoW.QuestionRepository.GetQuestions(category, level, pQuestionsQuantity);
                     if (!questions.Any())
                     {
@@ -82,19 +85,20 @@ namespace TdP2019TPFinalRichieri.Services
                     return ResponseDTO<SessionDTO>.Ok("Session successfully created.", _mapper.Map<SessionDTO>(session));
                 }
             }
-            catch (NotEnoughQuestionsException ex)
+            catch(Exception ex)
             {
                 _logger.Error(ex, $"{ex.Message} ::" +
-                	" Parameters: pUserId={pUserId}, pCategoryId={pCategoryId}, pLevelId={pLevelId}," +
-                	" pQuestionsQuantity={pQuestionsQuantity}");
-                return ResponseDTO<SessionDTO>.InternalError($"Failed to create new session. {ex.Message}");
-            }
-            catch (InvalidParametersException ex)
-            {
-                _logger.Error(ex, $"{ex.Message} ::" +
-                    " Parameters: pUserId={pUserId}, pCategoryId={pCategoryId}, pLevelId={pLevelId}," +
-                    " pQuestionsQuantity={pQuestionsQuantity}");
-                return ResponseDTO<SessionDTO>.BadRequest($"Failed to create new session. {ex.Message}");
+                    $" Parameters: pUserId={pUserId}, pCategoryId={pCategoryId}, pLevelId={pLevelId}," +
+                    $" pQuestionsQuantity={pQuestionsQuantity}");
+                ResponseCode errorCode = ResponseCode.InternalError;
+                if (ex.GetType() == typeof(NotFoundException))
+                {
+                    errorCode = ResponseCode.NotFound;
+                } else if (ex.GetType() == typeof(BadRequestException))
+                {
+                    errorCode = ResponseCode.BadRequest;
+                }
+                return ResponseDTO<SessionDTO>.Error($"Failed to create new session", errorCode);
             }
         }
 

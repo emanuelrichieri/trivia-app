@@ -27,11 +27,11 @@
             IEnumerable<Question> questions = new List<Question>();
             if (pCategory == null || pLevel == null)
             {
-                throw new InvalidParametersException("Level and Category must not be null.");
+                throw new BadRequestException("Level and Category must not be null.");
             }
             if (pQuantity <= 0)
             {
-                throw new InvalidParametersException("Quantity must be greather than zero.");
+                throw new BadRequestException("Quantity must be greather than zero.");
             }
             var rand = new Random();
             questions = this.GetWhere(bQuestion => Equals(bQuestion.Category.Id, pCategory.Id) 
