@@ -53,31 +53,24 @@ namespace TdP2019TPFinalRichieriTests.Services
         [Test]
         [TestCase(0)] // Should be at least MIN_SESSION_QUESTIONS_QUANTITY, so it should return bad request
         [TestCase(-1)] // negative questions quantity should throw bad request exception
-        public void NewSessionShouldReturnBadRequest(int questionsQuantity)
+        public void NewSessionShouldThrowBadRequestException(int questionsQuantity)
         {
             _userRepositoryMock.Setup(repo => repo.Get(It.IsAny<int>())).Returns(new User());
             _categoryRepositoryMock.Setup(repo => repo.Get(It.IsAny<int>())).Returns(new Category());
             _levelRepositoryMock.Setup(repo => repo.Get(It.IsAny<int>())).Returns(new Level());
 
-            var response = _service.NewSession(rand.Next(), rand.Next(), rand.Next(), questionsQuantity);
-
-            Assert.IsFalse(response.Success);
-            Assert.AreEqual(ResponseCode.BadRequest, response.Code);
+            Assert.Throws<BadRequestException>(() => _service.NewSession(rand.Next(), rand.Next(), rand.Next(), questionsQuantity));
         }
 
         [Test]
-        public void NewSessionShouldReturnInternalError()
+        public void NewSessionShouldThrowNotEnoughQuestionsException()
         {
             _userRepositoryMock.Setup(repo => repo.Get(It.IsAny<int>())).Returns(new User());
             _categoryRepositoryMock.Setup(repo => repo.Get(It.IsAny<int>())).Returns(new Category());
             _levelRepositoryMock.Setup(repo => repo.Get(It.IsAny<int>())).Returns(new Level());
-
-
             _questionRepositoryMock.Setup(repo => repo.GetQuestions(It.IsAny<Category>(), It.IsAny<Level>(), It.IsAny<int>()))
                                         .Throws(new NotEnoughQuestionsException("mock error"));
-            var response = _service.NewSession(rand.Next(), rand.Next(), rand.Next(), MIN_SESSION_QUESTIONS_QUANTITY + rand.Next());
-            Assert.IsFalse(response.Success);
-            Assert.AreEqual(ResponseCode.InternalError, response.Code);
+            Assert.Throws<NotEnoughQuestionsException>(() => _service.NewSession(rand.Next(), rand.Next(), rand.Next(), MIN_SESSION_QUESTIONS_QUANTITY + rand.Next()));
         }
 
 
@@ -85,7 +78,7 @@ namespace TdP2019TPFinalRichieriTests.Services
         [TestCase("user")] // user not found case
         [TestCase("level")] // level not found case
         [TestCase("category")] // category not found case
-        public void NewSessionShouldReturnNotFound(string nullCase)
+        public void NewSessionShouldThrowNotFound(string nullCase)
         {
             // check if nullCase then return null
             User user = nullCase == "user" ? null : new User();
@@ -96,9 +89,7 @@ namespace TdP2019TPFinalRichieriTests.Services
             _levelRepositoryMock.Setup(repo => repo.Get(It.IsAny<int>())).Returns(level);
             _categoryRepositoryMock.Setup(repo => repo.Get(It.IsAny<int>())).Returns(category);
 
-            var response = _service.NewSession(rand.Next(), rand.Next(), rand.Next(), MIN_SESSION_QUESTIONS_QUANTITY + rand.Next());
-            Assert.IsFalse(response.Success);
-            Assert.AreEqual(ResponseCode.NotFound, response.Code);
+            Assert.Throws<NotFoundException>(() => _service.NewSession(rand.Next(), rand.Next(), rand.Next(), MIN_SESSION_QUESTIONS_QUANTITY + rand.Next()));
         }
 
         [Test]

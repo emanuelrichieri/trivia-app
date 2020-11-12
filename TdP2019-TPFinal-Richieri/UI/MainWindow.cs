@@ -62,6 +62,7 @@ namespace TdP2019TPFinalRichieri
 
         protected void OnBtnStartNewSessionClicked(object sender, EventArgs e)
         {
+            new NewSessionDialog(_triviaApp).Show();
         }
 
         protected void OnBtnShowRankingClicked(object sender, EventArgs e)

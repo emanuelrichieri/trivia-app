@@ -47,9 +47,19 @@ namespace TdP2019TPFinalRichieri.Services.Facade
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "Failed to create new Session.");
-                return ResponseDTO<SessionDTO>.InternalError(
-                         ErrorMessageHelper.FailedOperation("creating a new session"));
+                _logger.Error(ex, $"{ex.Message} ::" +
+                    $" Parameters: pUserId={pUserId}, pCategoryId={pCategoryId}, pLevelId={pLevelId}," +
+                    $" pQuestionsQuantity={pQuestionsQuantity}");
+                ResponseCode errorCode = ResponseCode.InternalError;
+                if (ex.GetType() == typeof(NotFoundException))
+                {
+                    errorCode = ResponseCode.NotFound;
+                }
+                else if (ex.GetType() == typeof(BadRequestException))
+                {
+                    errorCode = ResponseCode.BadRequest;
+                }
+                return ResponseDTO<SessionDTO>.Error(ErrorMessageHelper.FailedOperation("creating a new session"), errorCode);
             }
         }
 

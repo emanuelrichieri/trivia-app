@@ -24,7 +24,6 @@
         /// <param name="pQuantity">Questions.</param>
         public IEnumerable<Question> GetQuestions(Category pCategory, Level pLevel, int pQuantity)
         {
-            IEnumerable<Question> questions = new List<Question>();
             if (pCategory == null || pLevel == null)
             {
                 throw new BadRequestException("Level and Category must not be null.");
@@ -34,10 +33,10 @@
                 throw new BadRequestException("Quantity must be greather than zero.");
             }
             var rand = new Random();
-            questions = this.GetWhere(bQuestion => Equals(bQuestion.Category.Id, pCategory.Id) 
-                                             && Equals(bQuestion.Level.Id, pLevel.Id))
-                                                .OrderBy(x => rand.Next())
-                                                .Take(pQuantity);
+            var questions = this.GetWhere(bQuestion => Equals(bQuestion.Category, pCategory) 
+                                                    && Equals(bQuestion.Level, pLevel))
+                                .OrderBy(x => rand.Next())
+                                .Take(pQuantity);
             if (questions.Count() < pQuantity)
             {
                 throw new NotEnoughQuestionsException($"There are {questions.Count()} questions with the given parameters.");

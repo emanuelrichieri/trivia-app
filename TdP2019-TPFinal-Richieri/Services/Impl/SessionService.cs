@@ -18,9 +18,7 @@ namespace TdP2019TPFinalRichieri.Services
     {
         private IMapper _mapper;
         private IUnitOfWorkFactory _unitOfWorkFactory;
-
-        private readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
-
+        
         private readonly int MIN_SESSION_QUESTIONS_QUANTITY; // Default value 10
 
 
@@ -54,51 +52,29 @@ namespace TdP2019TPFinalRichieri.Services
         /// <param name="pQuestionsQuantity">Questions quantity.</param>
         public ResponseDTO<SessionDTO> NewSession(int pUserId, int pCategoryId, int pLevelId, int pQuestionsQuantity)
         {
-            try
+            if (pQuestionsQuantity < MIN_SESSION_QUESTIONS_QUANTITY)
             {
-                if (pQuestionsQuantity < MIN_SESSION_QUESTIONS_QUANTITY)
-                {
-                    throw new BadRequestException($"Questions quantity must be greather than {MIN_SESSION_QUESTIONS_QUANTITY}");
-                }
-                using (IUnitOfWork bUoW = _unitOfWorkFactory.GetUnitOfWork())
-                {
-                    User user = bUoW.UserRepository.Get(pUserId) ?? throw new NotFoundException($"User id {pUserId} not found.");
-                    Level level = bUoW.LevelRepository.Get(pLevelId) ?? throw new NotFoundException($"Level id {pLevelId} not found.");
-                    Category category = bUoW.CategoryRepository.Get(pCategoryId) ?? throw new NotFoundException($"Category id {pCategoryId} not found.");
-                    IEnumerable<Question> questions = bUoW.QuestionRepository.GetQuestions(category, level, pQuestionsQuantity);
-                    if (!questions.Any())
-                    {
-                        throw new NotEnoughQuestionsException("No questions were found with the given parameters.");
-                    }
-                    Session session = new Session
-                    {
-                        User = user,
-                        Level = level,
-                        Category = category,
-                        Questions = questions.ToList(),
-                        Date = DateTime.Now,
-                        Score = 0d
-                    };
-                    bUoW.SessionRepository.Add(session);
-                    bUoW.Complete();
-
-                    return ResponseDTO<SessionDTO>.Ok("Session successfully created.", _mapper.Map<SessionDTO>(session));
-                }
+                throw new BadRequestException($"Questions quantity must be greather than {MIN_SESSION_QUESTIONS_QUANTITY}");
             }
-            catch(Exception ex)
+            using (IUnitOfWork bUoW = _unitOfWorkFactory.GetUnitOfWork())
             {
-                _logger.Error(ex, $"{ex.Message} ::" +
-                    $" Parameters: pUserId={pUserId}, pCategoryId={pCategoryId}, pLevelId={pLevelId}," +
-                    $" pQuestionsQuantity={pQuestionsQuantity}");
-                ResponseCode errorCode = ResponseCode.InternalError;
-                if (ex.GetType() == typeof(NotFoundException))
+                var user = bUoW.UserRepository.Get(pUserId) ?? throw new NotFoundException($"User id {pUserId} not found.");
+                var level = bUoW.LevelRepository.Get(pLevelId) ?? throw new NotFoundException($"Level id {pLevelId} not found.");
+                var category = bUoW.CategoryRepository.Get(pCategoryId) ?? throw new NotFoundException($"Category id {pCategoryId} not found.");
+                var questions = bUoW.QuestionRepository.GetQuestions(category, level, pQuestionsQuantity);
+                var session = new Session
                 {
-                    errorCode = ResponseCode.NotFound;
-                } else if (ex.GetType() == typeof(BadRequestException))
-                {
-                    errorCode = ResponseCode.BadRequest;
-                }
-                return ResponseDTO<SessionDTO>.Error($"Failed to create new session", errorCode);
+                    User = user,
+                    Level = level,
+                    Category = category,
+                    Questions = questions.ToList(),
+                    Date = DateTime.Now,
+                    Score = 0d
+                };
+                bUoW.SessionRepository.Add(session);
+                bUoW.Complete();
+
+                return ResponseDTO<SessionDTO>.Ok("Session successfully created.", _mapper.Map<SessionDTO>(session));
             }
         }
 

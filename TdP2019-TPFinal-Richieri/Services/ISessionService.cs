@@ -4,7 +4,6 @@ using TdP2019TPFinalRichieri.DTO;
 
 namespace TdP2019TPFinalRichieri.Services
 {
-    using Entities;
 
     public interface ISessionService
     {
