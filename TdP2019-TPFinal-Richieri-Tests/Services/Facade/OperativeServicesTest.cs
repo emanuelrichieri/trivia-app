@@ -64,5 +64,102 @@ namespace TdP2019TPFinalRichieriTests.Services.Facade
             Assert.NotNull(response.Data);
         }
 
+        [Test]
+        public void NewSessionShouldReturnOk()
+        {
+            _sessionServiceMock.Setup(service => service.NewSession(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>()))
+                                .Returns(ResponseDTO<SessionDTO>.Ok(new SessionDTO()));
+
+            var response = _operativeServices.NewSession(1, 1, 1, 1);
+
+            Assert.IsTrue(response.Success);
+            Assert.AreEqual(ResponseCode.Ok, response.Code);
+            Assert.NotNull(response.Data);
+        }
+
+        [Test]
+        public void NewSessionShouldReturnInternalError()
+        {
+            _sessionServiceMock.Setup(service => service.NewSession(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>()))
+                               .Throws(new Exception("mock exception"));
+
+            var response = _operativeServices.NewSession(1, 1, 1, 1);
+
+            Assert.IsFalse(response.Success);
+            Assert.AreEqual(ResponseCode.InternalError, response.Code);
+        }
+
+
+        [Test]
+        public void NewSessionShouldReturnNotFound()
+        {
+            _sessionServiceMock.Setup(service => service.NewSession(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>()))
+                               .Throws(new NotFoundException("mock exception"));
+
+            var response = _operativeServices.NewSession(1, 1, 1, 1);
+
+            Assert.IsFalse(response.Success);
+            Assert.AreEqual(ResponseCode.NotFound, response.Code);
+        }
+
+
+        [Test]
+        public void NewSessionShouldReturnBadRequest()
+        {
+            _sessionServiceMock.Setup(service => service.NewSession(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>()))
+                               .Throws(new BadRequestException("mock exception"));
+
+            var response = _operativeServices.NewSession(1, 1, 1, 1);
+
+            Assert.IsFalse(response.Success);
+            Assert.AreEqual(ResponseCode.BadRequest, response.Code);
+        }
+
+
+        [Test]
+        public void LoginShouldBeOk()
+        {
+            _userServiceMock.Setup(service => service.Login(It.IsAny<string>(), It.IsAny<string>())).Returns(ResponseDTO<UserDTO>.Ok(new UserDTO()));
+
+            var response = _operativeServices.Login("test", "test");
+
+            Assert.IsTrue(response.Success);
+            Assert.AreEqual(ResponseCode.Ok, response.Code);
+        }
+
+        [Test]
+        public void LoginShouldReturnInternalError()
+        {
+            _userServiceMock.Setup(service => service.Login(It.IsAny<string>(), It.IsAny<string>())).Throws(new Exception("mock Exception"));
+
+            var response = _operativeServices.Login("test", "test");
+
+            Assert.IsFalse(response.Success);
+            Assert.AreEqual(ResponseCode.InternalError, response.Code);
+        }
+
+        [Test]
+        public void SignUpShouldBeOk()
+        {
+            _userServiceMock.Setup(service => service.SignUp(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns(ResponseDTO.Ok(""));
+
+            var response = _operativeServices.SignUp("test", "test", "test");
+
+            Assert.IsTrue(response.Success);
+            Assert.AreEqual(ResponseCode.Ok, response.Code);
+        }
+
+
+        [Test]
+        public void SignUpShouldReturnInternalError()
+        {
+            _userServiceMock.Setup(service => service.SignUp(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Throws(new Exception("mock Exception"));
+
+            var response = _operativeServices.SignUp("test", "test", "test");
+
+            Assert.IsFalse(response.Success);
+            Assert.AreEqual(ResponseCode.InternalError, response.Code);
+        }
+
     }
 }
