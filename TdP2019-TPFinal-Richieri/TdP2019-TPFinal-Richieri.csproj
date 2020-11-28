@@ -254,6 +254,7 @@
     <Compile Include="gtk-gui\TdP2019TPFinalRichieri.NewSessionDialog.cs" />
     <Compile Include="UI\NewSessionDialog.cs" />
     <Compile Include="UI\ModalMessage.cs" />
+    <Compile Include="Mapper\Profiles\SessionAnswerProfile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DAL\" />

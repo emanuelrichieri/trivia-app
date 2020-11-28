@@ -132,5 +132,97 @@ namespace TdP2019TPFinalRichieriTests.Services
             Assert.AreEqual("TEST-QUESTION", response.Data.Questions.First().Question);
             Assert.AreEqual("TEST-QUESTIONS-SET", response.Data.QuestionsSet);
         }
+
+
+        [Test]
+        public void AddAnswerShouldBeOk()
+        {
+            var correctAnswers = new List<AnswerDTO>
+                {
+                    new AnswerDTO
+                    {
+                        Answer = "test answer 1",
+                        IsCorrect = true
+                    },
+                    new AnswerDTO
+                    {
+                        Answer = "test answer 2",
+                        IsCorrect = true
+                    },
+                };
+            var sessionAnswer = new SessionAnswerDTO
+            {
+                Session = new SessionDTO(),
+                Question = new QuestionDTO
+                {
+                    IncorrectAnswers = new List<AnswerDTO>(),
+                    CorrectAnswers = correctAnswers
+                },
+                Answers = correctAnswers
+            };
+            _sessionRepositoryMock.Setup(repo => repo.Get(It.IsAny<int>())).Returns(new Session
+            {
+                Id = 1,
+                Answers = new List<SessionAnswer>()
+            });
+
+            var response = _service.AddAnswer(sessionAnswer);
+
+            Assert.IsTrue(response.Success);
+            Assert.AreEqual(ResponseCode.Ok, response.Code);
+            Assert.AreEqual("Right!", response.Message);
+            Assert.IsTrue(response.Data.IsCorrect);
+        }
+
+        [Test]
+        public void AddIncorrectAnswerShouldBeOk()
+        {
+            var correctAnswers = new List<AnswerDTO>
+                {
+                    new AnswerDTO
+                    {
+                        Answer = "test answer 1",
+                        IsCorrect = true
+                    },
+                    new AnswerDTO
+                    {
+                        Answer = "test answer 2",
+                        IsCorrect = true
+                    },
+                };
+            var sessionAnswer = new SessionAnswerDTO
+            {
+                Session = new SessionDTO(),
+                Question = new QuestionDTO
+                {
+                    IncorrectAnswers = new List<AnswerDTO>(),
+                    CorrectAnswers = correctAnswers
+                },
+                Answers = new List<AnswerDTO>()
+                {
+                    new AnswerDTO
+                    {
+                        Answer = "test",
+                        IsCorrect = false
+                    },
+                    new AnswerDTO
+                    {
+                        Answer = "test",
+                        IsCorrect = true
+                    },
+                }
+            };
+            _sessionRepositoryMock.Setup(repo => repo.Get(It.IsAny<int>())).Returns(new Session
+            {
+                Id = 1,
+                Answers = new List<SessionAnswer>()
+            });
+
+            var response = _service.AddAnswer(sessionAnswer);
+
+            Assert.IsTrue(response.Success);
+            Assert.AreEqual(ResponseCode.Ok, response.Code);
+            Assert.IsFalse(response.Data.IsCorrect);
+        }
     }
 }

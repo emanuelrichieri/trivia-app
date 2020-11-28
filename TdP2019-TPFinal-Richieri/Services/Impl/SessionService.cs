@@ -95,7 +95,12 @@ namespace TdP2019TPFinalRichieri.Services
                 // Get session entity from the given SessionId
                 Session session = bUoW.SessionRepository.Get(pSessionAnswer.Session.Id) ?? throw new Exception($"Session id {pSessionAnswer.Session.Id} not found.");
                 // Get sessionAnswer entity from DTO.
-                SessionAnswer sessionAnswer = _mapper.Map<SessionAnswer>(pSessionAnswer);
+                SessionAnswer sessionAnswer = new SessionAnswer
+                {
+                    Answers = _mapper.Map<IList<Answer>>(pSessionAnswer.Answers),
+                    Question = _mapper.Map<Question>(pSessionAnswer.Question),
+                    AnswerTime = pSessionAnswer.AnswerTime
+                };
                 session.Answers.ToList().Add(sessionAnswer);
                 bUoW.Complete();
 

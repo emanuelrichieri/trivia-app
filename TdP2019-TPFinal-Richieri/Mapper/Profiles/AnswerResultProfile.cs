@@ -16,6 +16,9 @@ namespace TdP2019TPFinalRichieri.Mapper.Profiles
                 )
                 .ForMember(destination => destination.UserAnswers,
                     map => map.MapFrom(source => source.Answers)
+                )
+                .ForMember(destination => destination.IsCorrect,
+                    map => map.MapFrom(source => source.IsCorrect())
                 );
         }
     }
