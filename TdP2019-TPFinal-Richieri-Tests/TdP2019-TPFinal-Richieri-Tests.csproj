@@ -45,7 +45,7 @@
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
-      <HintPath>..\packages\Moq.4.15.1\lib\net45\Moq.dll</HintPath>
+      <HintPath>..\packages\Moq.4.15.2\lib\net45\Moq.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
   </ItemGroup>
@@ -54,6 +54,7 @@
     <Compile Include="Services\Facade\OperativeServicesTest.cs" />
     <Compile Include="Services\Facade\BackOfficeServicesTest.cs" />
     <Compile Include="Services\SessionServiceTest.cs" />
+    <Compile Include="Services\UserServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

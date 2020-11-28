@@ -84,6 +84,12 @@ namespace TdP2019TPFinalRichieri.Services
 
             using (IUnitOfWork bUoW = _unitOfWorkFactory.GetUnitOfWork())
             {
+                var existingUser = bUoW.UserRepository.Get(user.Username);
+                if (existingUser != null)
+                {
+                    return ResponseDTO.BadRequest("User already registered.");
+                }
+
                 bUoW.UserRepository.Add(user);
                 bUoW.Complete();
 

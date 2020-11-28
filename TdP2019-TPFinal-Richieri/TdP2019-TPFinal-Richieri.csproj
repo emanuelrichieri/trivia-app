@@ -101,7 +101,7 @@
       <HintPath>..\packages\System.Text.Json.5.0.0\lib\net461\System.Text.Json.dll</HintPath>
     </Reference>
     <Reference Include="Npgsql">
-      <HintPath>..\packages\Npgsql.4.1.5\lib\net461\Npgsql.dll</HintPath>
+      <HintPath>..\packages\Npgsql.5.0.0\lib\netstandard2.0\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework6.Npgsql">
       <HintPath>..\packages\EntityFramework6.Npgsql.6.4.1\lib\net461\EntityFramework6.Npgsql.dll</HintPath>
@@ -147,6 +147,9 @@
     </Reference>
     <Reference Include="System.Diagnostics.DiagnosticSource">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.5.0.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Channels">
+      <HintPath>..\packages\System.Threading.Channels.5.0.0\lib\net461\System.Threading.Channels.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
