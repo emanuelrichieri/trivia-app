@@ -35,9 +35,11 @@ La aplicación presenta al usuario distintas preguntas con opciones de múltiple
 - Crear una base de datos en PostgreSQL
 - Ejecutar el script */sql/Init_data.sql*
 - Configurar los parámetros de conexión a la base de datos en el archivo *TdP2019-TPFinal-Richieri/App.config* como este ejemplo:
--`<connectionStrings>  
-<add  name="TriviaDb"  connectionString="Server=localhost;Port=5432;Database=trivia-app;User Id=postgres;Password=postgres;CommandTimeout=0;InternalCommandTimeout=0;Include Error Detail=true"  providerName="Npgsql"/>  
-</connectionStrings>`
+
+> `<connectionStrings>   <add  name="TriviaDb" 
+> connectionString="Server=localhost;Port=5432;Database=trivia-app;User
+> Id=postgres;Password=postgres;CommandTimeout=0;InternalCommandTimeout=0;Include
+> Error Detail=true"  providerName="Npgsql"/>   </connectionStrings>`
 
 - Compilar y ejecutar
 
