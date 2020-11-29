@@ -28,12 +28,12 @@ La aplicación presenta al usuario distintas preguntas con opciones de múltiple
 -  Si se va a utilizar directamente el archivo ejecutable *TdP2019-TPFinal-Richieri.exe*, asegurarse:
 	- Que postgresql corra de manera local en el puerto 5432
 	- Que exista un usuario *postgres* con password *postgres* 
-	- Que exista una base de datos con nombre ***trivia-app***
-		- En esa base de atos, ejecutar el script  */sql/Init_data.sql* 
+	- En el gestor de bd postgres, ejecutar el script de creación de db */sql/Create_database.sql*
+	- Ejecutar el script  */sql/Init_data.sql* 
 
-#### Ejecución medidante IDE
-- Crear una base de datos en PostgreSQL
-- Ejecutar el script */sql/Init_data.sql*
+#### Ejecución medidante IDE (con configuración personalizada de base de datos)
+- En  el gestor de bd postgres, ejecutar el script de creación de db */sql/Create_database.sql*
+- Ejecutar el script  */sql/Init_data.sql* 
 - Configurar los parámetros de conexión a la base de datos en el archivo *TdP2019-TPFinal-Richieri/App.config* como este ejemplo:
 
 > `<connectionStrings>   <add  name="TriviaDb" 
