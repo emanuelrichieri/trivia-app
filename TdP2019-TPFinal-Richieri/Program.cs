@@ -8,8 +8,6 @@ namespace TdP2019TPFinalRichieri
     using Util;
     using Services.Facade;
     using Mapper;
-    using System.Data.Entity;
-    using DAL.EntityFramework;
 
     public class Program
     {

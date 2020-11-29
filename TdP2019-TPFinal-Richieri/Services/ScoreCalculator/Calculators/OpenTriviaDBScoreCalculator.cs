@@ -28,7 +28,7 @@ namespace TdP2019TPFinalRichieri.Services.ScoreCalculator.Calculators
             int totalQuestionsCount = pSession.Questions.Count();
             double timeFactor = pSession.GetTime() / totalQuestionsCount;
             int correctAnswersCount = pSession.Answers.Count(answer => answer.IsCorrect());
-            return correctAnswersCount / totalQuestionsCount * difficultyFactor * timeFactor;
+            return ((double) correctAnswersCount / totalQuestionsCount) * difficultyFactor * timeFactor;
         }
 
         /// <summary>

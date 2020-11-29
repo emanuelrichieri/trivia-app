@@ -17,7 +17,6 @@ namespace TdP2019TPFinalRichieri
 
         public QuestionsSetDTO SelectedQuestionsSet { get; set; }
 
-
         public TriviaApp(IOperativeServices pOperativeServices,
                         IBackOfficeServices pBackOfficeServices)
         {
@@ -65,15 +64,15 @@ namespace TdP2019TPFinalRichieri
             {
                 return ResponseDTO<QuestionDTO>.BadRequest("No active session.");
             }
-            if (CurrentSession.RemainingQuestions.ToList().Count > 0)
+            if (CurrentSession.RemainingQuestions.Count > 0)
             {
                 QuestionDTO nextQuestion = CurrentSession.RemainingQuestions.First();
-                CurrentSession.RemainingQuestions.ToList().RemoveAt(0);
+                CurrentSession.RemainingQuestions.RemoveAt(0);
                 nextQuestion.ShowedMoment = DateTime.Now;
 
                 return ResponseDTO<QuestionDTO>.Ok(nextQuestion);
             }
-            return ResponseDTO<QuestionDTO>.Ok("There are no more questions for the given session");
+            return ResponseDTO<QuestionDTO>.NoContent("There are no more questions for the given session");
         }
 
 
@@ -93,6 +92,14 @@ namespace TdP2019TPFinalRichieri
                 AnswerTime = (DateTime.Now - pQuestion.ShowedMoment).Seconds
             };
             return _operativeService.AddAnswer(sessionAnswer);
+        }
+
+        /// <summary>
+        /// Finish current Session
+        /// </summary>
+        public ResponseDTO<SessionResultDTO> FinishSession()
+        {
+            return _operativeService.FinishSession(CurrentSession.Id);
         }
 
 

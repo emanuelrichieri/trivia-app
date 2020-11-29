@@ -34,5 +34,13 @@ namespace TdP2019TPFinalRichieri.DAL.EntityFramework
         public IDbSet<Session> Sessions { get; set; }
 
         public IDbSet<User> Users { get; set; }
+
+        public IDbSet<Level> Levels { get; set; }
+
+        public IDbSet<Category> Categories { get; set; }
+
+        public IDbSet<SessionAnswer> SessionAnswers { get; set; }
+
+        public IDbSet<Answer> Answers { get; set; }
     }
 }

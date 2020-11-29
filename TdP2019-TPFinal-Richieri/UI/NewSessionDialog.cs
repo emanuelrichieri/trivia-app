@@ -55,7 +55,9 @@ namespace TdP2019TPFinalRichieri
             var response = _triviaApp.StartNewSession(category, level, questionsNumber);
             if (response.Success)
             {
-                var session = response.Data;
+                _triviaApp.CurrentSession = response.Data;
+                new SessionDialog(_triviaApp).Show();
+                this.Hide();
             }
             else
             {

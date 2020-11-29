@@ -61,20 +61,21 @@ namespace TdP2019TPFinalRichieri.Services
                 var user = bUoW.UserRepository.Get(pUserId) ?? throw new NotFoundException($"User id {pUserId} not found.");
                 var level = bUoW.LevelRepository.Get(pLevelId) ?? throw new NotFoundException($"Level id {pLevelId} not found.");
                 var category = bUoW.CategoryRepository.Get(pCategoryId) ?? throw new NotFoundException($"Category id {pCategoryId} not found.");
-                var questions = bUoW.QuestionRepository.GetQuestions(category, level, pQuestionsQuantity);
+                var questions = bUoW.QuestionRepository.GetQuestions(category, level, pQuestionsQuantity).ToList();
                 var session = new Session
                 {
                     User = user,
                     Level = level,
                     Category = category,
-                    Questions = questions.ToList(),
+                    Questions = questions,
                     Date = DateTime.Now,
                     Score = 0d
                 };
                 bUoW.SessionRepository.Add(session);
-                bUoW.Complete();
 
-                return ResponseDTO<SessionDTO>.Ok("Session successfully created.", _mapper.Map<SessionDTO>(session));
+                bUoW.Complete();
+                var sessionDTO = _mapper.Map<SessionDTO>(session);
+                return ResponseDTO<SessionDTO>.Ok("Session successfully created.", sessionDTO);
             }
         }
 
@@ -92,19 +93,22 @@ namespace TdP2019TPFinalRichieri.Services
             }
             using (IUnitOfWork bUoW = _unitOfWorkFactory.GetUnitOfWork())
             {
-                // Get session entity from the given SessionId
-                Session session = bUoW.SessionRepository.Get(pSessionAnswer.Session.Id) ?? throw new Exception($"Session id {pSessionAnswer.Session.Id} not found.");
-                // Get sessionAnswer entity from DTO.
+                var question = bUoW.QuestionRepository.Get(pSessionAnswer.Question.Id);
+                var answers = question.Answers.Where(answer => pSessionAnswer.Answers.Select(a => a.Id).Contains(answer.Id)).ToList();
                 SessionAnswer sessionAnswer = new SessionAnswer
                 {
-                    Answers = _mapper.Map<IList<Answer>>(pSessionAnswer.Answers),
-                    Question = _mapper.Map<Question>(pSessionAnswer.Question),
+                    Answers = answers,
+                    Question = bUoW.QuestionRepository.Get(pSessionAnswer.Question.Id),
                     AnswerTime = pSessionAnswer.AnswerTime
                 };
-                session.Answers.ToList().Add(sessionAnswer);
-                bUoW.Complete();
+
+                // Get session entity from the given SessionId
+                Session session = bUoW.SessionRepository.Get(pSessionAnswer.Session.Id) ?? throw new Exception($"Session id {pSessionAnswer.Session.Id} not found.");
+                session.Answers.Add(sessionAnswer);
 
                 AnswerResultDTO answerResult = _mapper.Map<AnswerResultDTO>(sessionAnswer);
+                bUoW.Complete();
+
                 return ResponseDTO<AnswerResultDTO>.Ok(answerResult.IsCorrect ? "Right!" : "Wrong answer.", answerResult);
             }
         }
@@ -150,12 +154,17 @@ namespace TdP2019TPFinalRichieri.Services
         /// <param name="pSession">Session.</param>
         public double CalculateScore(Session pSession)
         {
-            QuestionsSet questionsSet = pSession.GetQuestionsSet() ?? throw new Exception("Invalid Questions Set.");
-            if (this._scoreCalculators.TryGetValue(questionsSet.Name.ToUpper(), out IScoreCalculator calculator))
+            using(var bUoW = _unitOfWorkFactory.GetUnitOfWork())
             {
-                return calculator.CalculateScore(pSession);
+                var category = bUoW.CategoryRepository.Get(pSession.Category.Id);
+
+                QuestionsSet questionsSet = pSession.GetQuestionsSet() ?? throw new Exception("Invalid Questions Set.");
+                if (this._scoreCalculators.TryGetValue(questionsSet.Name.ToUpper(), out IScoreCalculator calculator))
+                {
+                    return calculator.CalculateScore(pSession);
+                }
+                throw new Exception("There is no calculator defined for the Session's QuestionsSet.");
             }
-            throw new Exception("There is no calculator defined for the Session's QuestionsSet.");
         }
     }
 }

@@ -55,6 +55,7 @@
     <Compile Include="Services\Facade\BackOfficeServicesTest.cs" />
     <Compile Include="Services\SessionServiceTest.cs" />
     <Compile Include="Services\UserServiceTest.cs" />
+    <Compile Include="Services\ScoreCalculators\OpenTriviaDBScoreCalculatorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -68,6 +69,7 @@
   <ItemGroup>
     <Folder Include="Services\" />
     <Folder Include="Services\Facade\" />
+    <Folder Include="Services\ScoreCalculators\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

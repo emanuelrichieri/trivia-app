@@ -12,7 +12,7 @@ namespace TdP2019TPFinalRichieri.Entities
         public Category Category { get; set; }
         public DateTime Date { get; set; }
         public virtual IList<Question> Questions { get; set; }
-        public virtual IList<SessionAnswer> Answers { get; set; }
+        public virtual IList<SessionAnswer> Answers { get; set; } = new List<SessionAnswer>();
         public double Score { get; set; }
 
 

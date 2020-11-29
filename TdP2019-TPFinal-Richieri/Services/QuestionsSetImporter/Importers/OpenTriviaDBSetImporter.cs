@@ -114,12 +114,12 @@ namespace TdP2019TPFinalRichieri.Services.QuestionsSetImporter.Importers
                         Description = WebUtility.HtmlDecode(jsonQuestionItem.correct_answer.ToString()),
                         IsCorrect = true
                     };
-                    question.Answers.ToList().Add(correctAnswer);
+                    question.Answers.Add(correctAnswer);
 
                     // Map incorrect answers
                     foreach(var incorrectAnswer in jsonQuestionItem.incorrect_answers)
                     {
-                        question.Answers.ToList().Add(
+                        question.Answers.Add(
                            new Answer
                            {
                                Description = WebUtility.HtmlDecode(incorrectAnswer.ToString()),

@@ -141,11 +141,13 @@ namespace TdP2019TPFinalRichieriTests.Services
                 {
                     new AnswerDTO
                     {
+                        Id = 1,
                         Answer = "test answer 1",
                         IsCorrect = true
                     },
                     new AnswerDTO
                     {
+                        Id = 2,
                         Answer = "test answer 2",
                         IsCorrect = true
                     },
@@ -155,11 +157,27 @@ namespace TdP2019TPFinalRichieriTests.Services
                 Session = new SessionDTO(),
                 Question = new QuestionDTO
                 {
-                    IncorrectAnswers = new List<AnswerDTO>(),
-                    CorrectAnswers = correctAnswers
+                    Id = 1
                 },
                 Answers = correctAnswers
             };
+            _questionRepositoryMock.Setup(repo => repo.Get(It.IsAny<int>())).Returns(new Question
+            {
+                Id = 1,
+                Answers = new List<Answer>
+                {
+                    new Answer
+                    {
+                        Id = 1,
+                        IsCorrect = true
+                    },
+                    new Answer
+                    {
+                        Id = 2,
+                        IsCorrect = true
+                    }
+                }
+            });
             _sessionRepositoryMock.Setup(repo => repo.Get(It.IsAny<int>())).Returns(new Session
             {
                 Id = 1,
@@ -202,16 +220,42 @@ namespace TdP2019TPFinalRichieriTests.Services
                 {
                     new AnswerDTO
                     {
+                        Id = 1,
                         Answer = "test",
                         IsCorrect = false
                     },
                     new AnswerDTO
                     {
+                        Id = 3,
                         Answer = "test",
                         IsCorrect = true
                     },
                 }
             };
+
+            _questionRepositoryMock.Setup(repo => repo.Get(It.IsAny<int>())).Returns(new Question
+            {
+                Id = 1,
+                Answers = new List<Answer>
+                {
+                    new Answer
+                    {
+                        Id = 1,
+                        IsCorrect = true
+                    },
+                    new Answer
+                    {
+                        Id = 2,
+                        IsCorrect = true
+                    },
+                    new Answer
+                    {
+                        Id = 3,
+                        IsCorrect = false
+
+                    }
+                }
+            });
             _sessionRepositoryMock.Setup(repo => repo.Get(It.IsAny<int>())).Returns(new Session
             {
                 Id = 1,
