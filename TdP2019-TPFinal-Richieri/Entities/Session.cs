@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace TdP2019TPFinalRichieri.Entities
 {
-    public class Session
+    public class Session : IComparable
     {
         public int Id { get; set; }
         public User User { get; set; }
@@ -52,6 +52,29 @@ namespace TdP2019TPFinalRichieri.Entities
         public int GetTime()
         {
             return this.Answers.Sum(answer => answer.AnswerTime);
+        }
+
+
+        /// <summary>
+        /// Compare two sessions. First by score (higher first), and if they are equal,
+        /// then by time (lower first).
+        /// </summary>
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+            {
+                return 1;
+            }
+            if (obj is Session otherSession)
+            {
+                const double EPSILON = 0.00000001;
+                if (Math.Abs(otherSession.Score - this.Score) < EPSILON)
+                {
+                    return this.GetTime() - otherSession.GetTime();
+                }
+                return -this.Score.CompareTo(otherSession.Score);
+            }
+            throw new ArgumentException("Object is not a Session");
         }
     }
 }

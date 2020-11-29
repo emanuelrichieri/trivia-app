@@ -67,6 +67,7 @@ namespace TdP2019TPFinalRichieri
 
         protected void OnBtnShowRankingClicked(object sender, EventArgs e)
         {
+            new RankingDialog(_triviaApp).Show();
         }
 
         protected void OnBtnLogoutClicked(object sender, EventArgs e)

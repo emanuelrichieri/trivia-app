@@ -122,7 +122,8 @@ namespace TdP2019TPFinalRichieri.Services
         {
             using (IUnitOfWork bUoW = _unitOfWorkFactory.GetUnitOfWork())
             {
-                IEnumerable<Session> sessions = bUoW.SessionRepository.GetWhere(session => Equals(pQuestionsSetId, session.GetQuestionsSet().Id));
+                List<Session> sessions = bUoW.SessionRepository.GetByQuestionsSet(pQuestionsSetId).ToList();
+                sessions.Sort();
                 IEnumerable<SessionResultDTO> sessionResults = _mapper.Map<IEnumerable<SessionResultDTO>>(sessions);
                 return ResponseDTO<IEnumerable<SessionResultDTO>>.Ok(sessionResults);
             }

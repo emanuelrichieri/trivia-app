@@ -104,6 +104,15 @@ namespace TdP2019TPFinalRichieri
 
 
         /// <summary>
+        /// Get questions set ranking
+        /// </summary>
+        public ResponseDTO<IEnumerable<SessionResultDTO>> ShowRanking()
+        {
+            return _operativeService.ShowRanking(this.SelectedQuestionsSet.Id);
+        }
+
+
+        /// <summary>
         /// Gets all Questions Sets available.
         /// </summary>
         /// <returns>Questions set list.</returns>

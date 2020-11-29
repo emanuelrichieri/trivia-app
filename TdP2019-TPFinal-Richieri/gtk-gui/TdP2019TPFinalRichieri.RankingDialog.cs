@@ -8,6 +8,10 @@ namespace TdP2019TPFinalRichieri
 
 		private global::Gtk.Image imgHeader;
 
+		private global::Gtk.ScrolledWindow GtkScrolledWindow;
+
+		private global::Gtk.TreeView treeviewRanking;
+
 		private global::Gtk.Button btnClose;
 
 		protected virtual void Build()
@@ -33,15 +37,27 @@ namespace TdP2019TPFinalRichieri
 			w2.Position = 0;
 			w2.Expand = false;
 			w2.Fill = false;
+			// Container child vboxSignUp.Gtk.Box+BoxChild
+			this.GtkScrolledWindow = new global::Gtk.ScrolledWindow();
+			this.GtkScrolledWindow.Name = "GtkScrolledWindow";
+			this.GtkScrolledWindow.ShadowType = ((global::Gtk.ShadowType)(1));
+			// Container child GtkScrolledWindow.Gtk.Container+ContainerChild
+			this.treeviewRanking = new global::Gtk.TreeView();
+			this.treeviewRanking.CanFocus = true;
+			this.treeviewRanking.Name = "treeviewRanking";
+			this.GtkScrolledWindow.Add(this.treeviewRanking);
+			this.vboxSignUp.Add(this.GtkScrolledWindow);
+			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.vboxSignUp[this.GtkScrolledWindow]));
+			w4.Position = 1;
 			w1.Add(this.vboxSignUp);
-			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(w1[this.vboxSignUp]));
-			w3.Position = 0;
+			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(w1[this.vboxSignUp]));
+			w5.Position = 0;
 			// Internal child TdP2019TPFinalRichieri.RankingDialog.ActionArea
-			global::Gtk.HButtonBox w4 = this.ActionArea;
-			w4.Name = "dialog1_ActionArea";
-			w4.Spacing = 10;
-			w4.BorderWidth = ((uint)(5));
-			w4.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
+			global::Gtk.HButtonBox w6 = this.ActionArea;
+			w6.Name = "dialog1_ActionArea";
+			w6.Spacing = 10;
+			w6.BorderWidth = ((uint)(5));
+			w6.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.btnClose = new global::Gtk.Button();
 			this.btnClose.CanDefault = true;
@@ -51,9 +67,9 @@ namespace TdP2019TPFinalRichieri
 			this.btnClose.UseUnderline = true;
 			this.btnClose.Label = "gtk-close";
 			this.AddActionWidget(this.btnClose, -7);
-			global::Gtk.ButtonBox.ButtonBoxChild w5 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w4[this.btnClose]));
-			w5.Expand = false;
-			w5.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w7 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w6[this.btnClose]));
+			w7.Expand = false;
+			w7.Fill = false;
 			if ((this.Child != null))
 			{
 				this.Child.ShowAll();
