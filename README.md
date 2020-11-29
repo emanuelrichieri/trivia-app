@@ -35,8 +35,7 @@ La aplicación presenta al usuario distintas preguntas con opciones de múltiple
 - Crear una base de datos en PostgreSQL
 - Ejecutar el script */sql/Init_data.sql*
 - Configurar los parámetros de conexión a la base de datos en el archivo *TdP2019-TPFinal-Richieri/App.config* como este ejemplo:
--`  
-<connectionStrings>  
+-`<connectionStrings>  
 <add  name="TriviaDb"  connectionString="Server=localhost;Port=5432;Database=trivia-app;User Id=postgres;Password=postgres;CommandTimeout=0;InternalCommandTimeout=0;Include Error Detail=true"  providerName="Npgsql"/>  
 </connectionStrings>`
 
@@ -48,9 +47,13 @@ La aplicación presenta al usuario distintas preguntas con opciones de múltiple
 
 El objetivo de la funcionalidad administrativa es gestionar en la aplicación los diferentes conjuntos de preguntas/respuestas a ser utilizados en la funcionalidad operativa.
 Un conjunto es una agrupación de preguntas/respuestas con el mismo origen. Las preguntas pertenecen a una categoría (por ejemplo deportes, artes, etc.), tienen niveles de dificultad (alto, medio, bajo) y múltiples respuestas asociadas. Las categorías y niveles están relacionadas a un conjunto de datos particular.
+
 En la aplicación podría haber muchos conjuntos, pero inicialmente se incluye el conjunto de preguntas del sitio Opentdb Opentdb (Open Trivia DataBase - https://opentdb.com/)  -un sitio de internet el cual posee datos de diferentes trivias las que pueden ser inspeccionadas y también modificadas en forma online-.
-Este sitio permite además descargar las trivias mediante una API que devuelve los datos en formato JSON (JavaScript Object Notation). A continuación se encuentra el link de acceso a la documentación de la API:
+Este sitio permite además descargar las trivias mediante una API que devuelve los datos en formato JSON (JavaScript Object Notation). 
+
+A continuación se encuentra el link de acceso a la documentación de la API:
 https://opentdb.com/api_config.php. 
+
 Mediante esta API un usuario administrativo de la aplicación puede realizar la importación de datos de las trivias disponibles (categorías, preguntas y niveles), persistiénolas internamente y asociándolas al conjunto de preguntas Opentdb.
 
 
@@ -72,13 +75,17 @@ La funcionalidad operativa tiene como objetivo mostrar las preguntas al usuario 
 2. Seleccionar un conjunto de preguntas
 3.  ##### ***Examen***
 	a. Seleccionar la opción "Start new Session"
+	
 	b. Elegir categoría, nivel de dificultad y cantidad de preguntas
+	
 	c. Se mostrarán las preguntas una por una. Para responder cada una de ellas se dispondrá del tiempo esperado de respuesta configurado para el conjunto de preguntas seleccionado. Una vez cumplido el tiempo, la respuesta se registra tal cual está (con el valor seleccionado o vacía). 
+	
 	d. Al finalizar la sesión, se muestra el puntaje (ver sección cálculo el puntaje).
 	
 	##### ***Ranking***
 
 	a. Seleccionar la opción "Show ranking"
+	
 	b. Se mostrará una tabla con los mejores puntajes obtenidos para el conjunto de preguntas seleccionado.
 
 #### *Cálculo del puntaje de la sesión*
@@ -89,11 +96,15 @@ En el caso del conjunto **Opentdb**, el puntaje se calcula de acuerdo a la sigui
 
 ***Puntaje = cantidad respuestas correctas / cantidad de preguntas * factor dificultad * factor tiempo.***
 donde: 
+
 *Factor dificultad*:
+
 	◦ alto: 5 puntos.
 	◦ medio: 3 puntos.
 	◦ bajo: 1 punto.
+	
 *Factor tiempo*: si tiempo total insumido / cantidad de preguntas
+
 	◦ menor a 5 segundos: 5 puntos.
 	◦ entre 5 y 20 segundos: 3 puntos.
 	◦ mayor a 20 segundos: 1 punto.
