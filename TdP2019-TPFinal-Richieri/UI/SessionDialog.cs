@@ -83,20 +83,7 @@ namespace TdP2019TPFinalRichieri
         protected void LoadNextQuestion()
         {
             var nextQuestionResponse = _triviaApp.NextQuestion();
-            if (ResponseCode.NoContent == nextQuestionResponse.Code)
-            {
-                var sessionResultResponse = this._triviaApp.FinishSession();
-                if (sessionResultResponse.Success)
-                {
-                    ModalMessage.Info(this, sessionResultResponse.Message);
-                }
-                else
-                {
-                    ModalMessage.Error(this, sessionResultResponse.Message);
-                }
-                this.Hide();
-            }
-            else
+            if (nextQuestionResponse.Success)
             {
                 _question = nextQuestionResponse.Data;
                 this.entryQuestion.Text = _question.Question;
@@ -106,6 +93,24 @@ namespace TdP2019TPFinalRichieri
                 {
                     this.cbbAnswers.AppendText(answer.Answer);
                 }
+            }
+            else
+            {
+                if (ResponseCode.NoContent == nextQuestionResponse.Code)
+                {
+                    var sessionResultResponse = this._triviaApp.FinishSession();
+                    if (sessionResultResponse.Success)
+                    {
+                        ModalMessage.Info(this, sessionResultResponse.Message);
+                    }
+                    else
+                    {
+                        ModalMessage.Error(this, sessionResultResponse.Message);
+                    }
+                }
+                this._answerTimer.Stop();
+                this._answerTimer.Dispose();
+                this.Hide();
             }
         }
 
